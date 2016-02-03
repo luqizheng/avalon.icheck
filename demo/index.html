@@ -96,13 +96,14 @@
                         <li>checkboxValue:{{checkboxValue}}</li>
                         <li>
                             <ms:icheck config='icheck'>
-                                <input type='checkbox' tabindex="1" id="input-1" value="1" name="input-checkbox" ms-duplex="checkboxValue" />
+                                <input type='checkbox' tabindex="1" id="input-1" value="1" name="input-checkbox" ms-duplex="checkboxValue"
+                                />
                             </ms:icheck>
                             <label for="input-1">Checkbox, <span>#input-1</span></label>
                         </li>
                         <li>
                             <ms:icheck config='icheck'>
-                                <input tabindex="2" type="checkbox" id="input-2" ms-duplex="checkboxValue " value="2" />
+                                <input tabindex="2" type="checkbox" id="input-2" ms-duplex="checkboxValue " value="2" ms-attr-disabled="disabledInput_2"/>
                             </ms:icheck>
                             <label for="input-2">Checkbox, <span>#input-2</span></label>
                         </li>
@@ -117,7 +118,7 @@
                         </li>
                         <li>
                             <ms:icheck config='icheck'>
-                                <input tabindex="4" value="4" type="radio" id="input-4" name="demo-radio" ms-duplex-string="radioValue">
+                                <input tabindex="4" value="4" type="radio" id="input-4" name="demo-radio" ms-duplex-string="radioValue" ms-attr-disabled="disabledInput_4">
                             </ms:icheck>
 
                             <label for="input-4">Radio button, <span>#input-4</span></label>
@@ -127,19 +128,29 @@
                         avalon.define({
                             $id:"Demo",
                             checkboxValue:[],
-                            radioValue:0,                            
-                            disabledInput_1:false,
-                            disabledInput_2:false,
-                            disabledInput_3:false,
+                            radioValue:0,
+                            disabledInput_2:false,                           
                             disabledInput_4:false,
                             icheck:{
                                  checkboxClass: 'icheckbox_square-blue',
-                                 radioClass: 'iradio_square-blue'                                 
+                                 radioClass: 'iradio_square-blue',
+                                 increaseArea:"20%"                                 
                             },
                             changeState:function(){
                                 var vm = avalon.vmodels.Demo;
-                                vm.icheck.disabled=true;
-                            }                                                       
+                                vm.checkboxValue.ensure("1");
+                                vm.radioValue=3;
+                            },
+                            removeState:function(){
+                                var vm = avalon.vmodels.Demo;
+                                vm.checkboxValue.remove("1");
+                                vm.radioValue=null;                            
+                            },
+                            disabledThem:function(trueOrFalse){
+                                var vm = avalon.vmodels.Demo;
+                                vm.disabledInput_4=trueOrFalse;
+                                vm.disabledInput_2=trueOrFalse;
+                            }
                         })
           /*$(document).ready(function(){
             var callbacks_list = $('.demo-callbacks ul');
@@ -162,40 +173,63 @@
           </dt>
                     <dd>
                         <pre class="markup ">
-$('#input-1, #input-3').iCheck('check');
+{
+    ....
+    changeState:function(){
+        var vm = avalon.vmodels.Demo;
+        vm.checkboxValue.ensure("1");
+        vm.radioValue=3;
+    }
+}                              
 </pre>
                     </dd>
                     <dt>
-            <span class="self do-uncheck ">Remove <span class="mark ">checked</span> state from 1 and 3 inputs</span>
+            <span class="self do-uncheck" ms-click="removeState">Remove <span class="mark ">checked</span> state from 1 and 3 inputs</span>
             <span class="code ">
               <span class="self ">show code</span>
             </span>
           </dt>
                     <dd>
                         <pre class="markup ">
-$('#input-1, #input-3').iCheck('uncheck');
+{
+    ....
+     removeState:function(){
+        var vm = avalon.vmodels.Demo;
+        vm.checkboxValue.remove("1");
+        vm.radioValue=null;                            
+    },
+} 
 </pre>
                     </dd>
                     <dt>
-            <span class="self do-disable ">Add <span class="mark ">disabled</span> state to 2 and 4 inputs</span>
+            <span class="self do-disable" ms-click="disabledThem(true)">Add <span class="mark ">disabled</span> state to 2 and 4 inputs</span>
             <span class="code ">
               <span class="self ">show code</span>
             </span>
           </dt>
                     <dd>
                         <pre class="markup ">
+<input ... ms-attr-disabled="disabledInput_4">
 $('#input-2, #input-4').iCheck('disable');
+{
+    ...
+     disabledThem:function(trueOrFalse){
+        var vm = avalon.vmodels.Demo;
+        vm.disabledInput_4=trueOrFalse;
+        vm.disabledInput_2=trueOrFalse;
+    }
+}
 </pre>
                     </dd>
                     <dt>
-            <span class="self do-enable ">Remove <span class="mark ">disabled</span> state from 2 and 4 inputs</span>
+            <span class="self do-enable" ms-click="disabledThem(false)">Remove <span class="mark ">disabled</span> state from 2 and 4 inputs</span>
             <span class="code ">
               <span class="self ">show code</span>
             </span>
           </dt>
                     <dd>
                         <pre class="markup ">
-$('#input-2, #input-4').iCheck('enable');
+same as disabled...
 </pre>
                     </dd>
                     <dt>
@@ -206,7 +240,7 @@ $('#input-2, #input-4').iCheck('enable');
           </dt>
                     <dd>
                         <pre class="markup ">
-$('input').iCheck('destroy');
+No this function.
 </pre>
                     </dd>
                 </dl>
