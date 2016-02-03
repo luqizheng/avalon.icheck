@@ -93,30 +93,31 @@
                 </div>
                 <div class="demo-list clear">
                     <ul>
+                        <li>checkboxValue:{{checkboxValue}}</li>
                         <li>
                             <ms:icheck config='icheck'>
-                                <input type='checkbox' tabindex="1" id="input-1" value="1" name="input-checkbox" ms-duplex="input_1" />
+                                <input type='checkbox' tabindex="1" id="input-1" value="1" name="input-checkbox" ms-duplex="checkboxValue" />
                             </ms:icheck>
-                            <label for="input-1 ">Checkbox, <span>#input-1</span></label>
-                            <div>checkboxValue:{{input_1}}</div>
+                            <label for="input-1">Checkbox, <span>#input-1</span></label>
                         </li>
                         <li>
                             <ms:icheck config='icheck'>
-                                <input tabindex="2 " type="checkbox" id="input-2 " checked ms-duplex="input_2 " value="2" />
+                                <input tabindex="2" type="checkbox" id="input-2" ms-duplex="checkboxValue " value="2" />
                             </ms:icheck>
-                            <label for="input-2 ">Checkbox, <span>#input-2</span></label>
+                            <label for="input-2">Checkbox, <span>#input-2</span></label>
                         </li>
                     </ul>
                     <ul>
+                        <li>radioValue:{{radioValue}}</li>
                         <li>
                             <ms:icheck config='icheck'>
-                                <input tabindex="3" value="3" type="radio" id="input-3" name="demo-radio" ms-duplex-string="input_34">
+                                <input tabindex="3" value="3" type="radio" id="input-3" name="demo-radio" ms-duplex-string="radioValue">
                             </ms:icheck>
-                            <label for="input-3">Radio button, <span>#input-3</span>input_34：{{input_34}} </label>
+                            <label for="input-3">Radio button, <span>#input-3</span> </label>
                         </li>
                         <li>
                             <ms:icheck config='icheck'>
-                                <input tabindex="4" value="4" type="radio" id="input-4" name="demo-radio" ms-duplex-string="input_34">
+                                <input tabindex="4" value="4" type="radio" id="input-4" name="demo-radio" ms-duplex-string="radioValue">
                             </ms:icheck>
 
                             <label for="input-4">Radio button, <span>#input-4</span></label>
@@ -125,9 +126,8 @@
                     <script>
                         avalon.define({
                             $id:"Demo",
-                            input_1:[],
-                            input_2:[],
-                            input_34:3,                            
+                            checkboxValue:[],
+                            radioValue:0,                            
                             disabledInput_1:false,
                             disabledInput_2:false,
                             disabledInput_3:false,
