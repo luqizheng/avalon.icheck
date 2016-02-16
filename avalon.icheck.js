@@ -21,7 +21,8 @@
                         inputEle.setAttribute('ms-on-change', '_change($event)')
                         vm.tmp = ele.innerHTML;
                         vm.$type = type;
-                        vm.msAttrs = msAttrs;                       
+                        vm.msAttrs = msAttrs;
+                                               
                         break;
                     }
                 }
@@ -63,6 +64,7 @@
                     vm.ctrl.value = function () { //检查value的值的                            
                         return element.value;
                     }
+                    vm.ctrl.checked=element.checked;
                     break;
                 }
             }
